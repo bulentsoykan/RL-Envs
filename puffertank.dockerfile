@@ -37,13 +37,19 @@ RUN . $HOME/.local/bin/env \
     && . venv/bin/activate \
     && uv pip install \
     # Procgen mirror
-    glfw==2.7
+    glfw==2.7 \
+    # TankSim dependencies
+    gymnasium pygame
 
 # CARBS hyperparam sweeps
 RUN git clone https://github.com/pufferai/carbs \
     && . $HOME/.local/bin/env \
     && . venv/bin/activate \
     && uv pip install -e carbs
+
+# TankSim environment files
+COPY puffertank/tank_sim_env.py /puffertank/
+COPY puffertank/train_tanks.py /puffertank/
 
 # Neovim (btw)
 RUN . $HOME/.local/bin/env \
