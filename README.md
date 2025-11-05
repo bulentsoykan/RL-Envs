@@ -1,4 +1,3 @@
-![figure](https://pufferai.github.io/source/resource/header.png)
 
 # TankSim: A Combat Vehicle Simulation Environment
 
