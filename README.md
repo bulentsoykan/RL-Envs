@@ -56,6 +56,44 @@ bash docker.sh test
 
 Comes pre-loaded with NeoVim config. Use `:PlugInstall` for code completion with SuperMaven.
 
+## Visualization
+
+Watch TankSim battles in action! Generate visualizations to see tanks move, fight, and strategize.
+
+### Quick Start - Generate Episode Frames
+
+```bash
+cd puffertank
+python generate_episode_frames.py --seed 42 --max-steps 50
+```
+
+This creates a sequence of PNG images showing the battle step-by-step. Images are saved to `/tmp/tanksim_frame_*.png`.
+
+### Create Animated GIF
+
+```bash
+# Using ImageMagick
+convert -delay 10 -loop 0 /tmp/tanksim_frame_*.png tanksim_battle.gif
+
+# Or using Python
+python -c "
+from PIL import Image
+import glob
+frames = [Image.open(f) for f in sorted(glob.glob('/tmp/tanksim_frame_*.png'))]
+frames[0].save('battle.gif', save_all=True, append_images=frames[1:], duration=100, loop=0)
+"
+```
+
+### What You'll See
+
+- **Blue circles (Team 0)** vs **Red circles (Team 1)**
+- **Arrows** show tank orientation (↑ ↓ ← →)
+- **Health bars** below each tank
+- **Dark gray squares** are obstacles
+- **Step count** and team status at the top
+
+For detailed visualization options, see [VISUALIZATION_GUIDE.md](VISUALIZATION_GUIDE.md)
+
 ## Environment Details
 
 **Observation Space**: Box(1, 32, 32) - Top-down grid view where:
