@@ -383,6 +383,9 @@ class TankSimEnv(gymnasium.Env):
                 {
                     'agent_id': t['agent_id'],
                     'team': t['team'],
+                    'x': t['x'],
+                    'y': t['y'],
+                    'orientation': t['orientation'],
                     'health': t['health'],
                     'alive': t['alive']
                 } for t in self.tanks
